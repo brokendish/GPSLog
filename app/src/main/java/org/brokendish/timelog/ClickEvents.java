@@ -30,7 +30,7 @@ public class ClickEvents {
     public String getLatlng;
 
     //-------------------------------
-    //latlngから住所を逆引き
+    //latlngから住所を逆引き  @@
     //-------------------------------
     public void GetAddress(double latitude,double longitude,Context thi) {
 
