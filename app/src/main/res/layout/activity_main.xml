@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:id="@+id/tm"
+    android:theme="@android:style/Theme.DeviceDefault.Light"
+    android:touchscreenBlocksFocus="false"
+    android:background="#ff020201">
+
+    <TextView android:text="Memo" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textColor="@color/primary_material_light"
+        android:textIsSelectable="false" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:id="@+id/frameLayout">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText"
+                    android:layout_weight="1"
+                    android:textColor="@color/primary_material_light" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableRow2"
+                android:weightSum="1"
+                android:layout_alignTop="@+id/textView">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:weightSum="1">
+
+                    <ToggleButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="New ToggleButton"
+                        android:id="@+id/toggleButton"
+                        android:layout_weight="1.57" />
+
+                    <Button
+                        android:layout_width="257dp"
+                        android:layout_height="fill_parent"
+                        android:text="GPS位置情報取得"
+                        android:id="@+id/button" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="342dp"
+                android:id="@+id/tableRow"
+                android:weightSum="1"
+                android:layout_weight="1.01">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/listView"
+                    android:layout_column="0"
+                    android:textFilterEnabled="false"
+                    android:background="#ff484a48"
+                    android:smoothScrollbar="true"
+                    android:footerDividersEnabled="false"
+                    android:headerDividersEnabled="false"
+                    android:touchscreenBlocksFocus="false"
+                    android:theme="@android:style/Theme.DeviceDefault"
+                    android:choiceMode="none" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom|right">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="Export"
+                        android:id="@+id/button2" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="Open Evernote"
+                        android:id="@+id/button3" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="Delete"
+                        android:id="@+id/button4" />
+
+                </TableRow>
+
+            </TableRow>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</RelativeLayout>
