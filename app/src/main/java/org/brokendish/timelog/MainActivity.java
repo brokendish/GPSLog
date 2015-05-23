@@ -274,8 +274,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }catch(ActivityNotFoundException e){
             Toast.makeText(MainActivity.this, "Evernoteがインストールされていません。\nPlayストアからインストールして下さい。", Toast.LENGTH_SHORT).show();
             // 明示的に指定したアプリが見つからない場合、Playストアへ直行する
-            Uri uri = Uri.parse("market://search?q=Evernote");
-            Intent it = new Intent(Intent.ACTION_VIEW, uri);
+            //Uri uri = Uri.parse("market://search?q=Evernote");
+            Intent it = new Intent(Intent.ACTION_VIEW);
+            it.setData(Uri.parse("market://search?q=Evernote"));
             startActivity(it);
         }
     }
