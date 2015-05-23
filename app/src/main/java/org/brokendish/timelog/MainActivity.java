@@ -90,8 +90,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         // トグル押下イベントリスナーの登録
         tgb = (ToggleButton)findViewById(R.id.toggleButton);
-        tgb.setTextOn("Network");  //トグルボタンのメッセージ
         tgb.setTextOff("GPS");
+        tgb.setTextOn("Network");  //トグルボタンのメッセージ
         tgb.setChecked(false);       //OFFへ変更
 
 
