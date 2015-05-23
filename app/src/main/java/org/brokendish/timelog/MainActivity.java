@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -230,7 +231,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     // GPS位置情報取得ボタン
     // 位置情報取得を開始する
     private void onClickButton1() {
-        Toast.makeText(MainActivity.this, "GPS位置情報取得を開始します", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this, "GPS位置情報取得を開始します", Toast.LENGTH_SHORT).show();
         //GPSロケーション取得------------------
         String mm = "";
         mm = GpsLocationGet();
@@ -250,7 +251,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //現在日時を取得する
         Calendar c = Calendar.getInstance();
         //フォーマットパターンを指定して表示する
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 E曜日　hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 E曜日　HH:mm:ss");
         String readString ="【GPSLog　" + sdf.format(c.getTime()) + "】\n";
 
         Intent intent = new Intent();
@@ -341,7 +342,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // ToggleButton が On かどうかを取得
        if(tgb.isChecked()){
            //トグルがNetworkであればNetwork
-           Toast.makeText(MainActivity.this, "Networkから取得します", Toast.LENGTH_SHORT).show();
+//           Toast.makeText(MainActivity.this, "Networkから取得します", Toast.LENGTH_SHORT).show();
            //NetworkであればNetworkプロバイダのみ使用
            for(int i=0;providers.size()>i;i++){
                providerG = providers.get(i);
@@ -397,7 +398,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                             Log.d("Get", msg);
 
                             rrmsg = msg;
-                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
                             //GPSからの情報を取得
                             Altitude = String.valueOf(location.getAltitude());
@@ -524,7 +525,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //listViewの内容をファイルに書き出す
         listViewFileSave();
 
-        Toast.makeText(MainActivity.this, "リストを保存しました", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this, "リストを保存しました", Toast.LENGTH_SHORT).show();
 
         //リストを削除
         adapter.clear();
@@ -583,7 +584,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             Log.d("@@ファイル一覧@@@@", bb[0]);
 
             fileOutputStream.close();
-            Toast.makeText(MainActivity.this, "データファイルに保存しました", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "データファイルに保存しました", Toast.LENGTH_SHORT).show();
 
         }
         catch (IOException e) {
