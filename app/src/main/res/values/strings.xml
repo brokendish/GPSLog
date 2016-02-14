@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GPSLog</string>
+    <string name="app_name">GPSMemo</string>
 
     <string name="brokendish.org">Hello world!</string>
     <string name="action_settings">Settings</string>

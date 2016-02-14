@@ -53,12 +53,6 @@
                     android:layout_height="66dp"
                     android:weightSum="1">
 
-                    <ToggleButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:id="@+id/toggleButton"
-                        android:layout_weight="1.57" />
-
                     <Button
                         android:layout_width="257dp"
                         android:layout_height="fill_parent"
@@ -82,7 +76,7 @@
                     android:id="@+id/listView"
                     android:layout_column="0"
                     android:textFilterEnabled="false"
-                    android:background="#ff484a48"
+                    android:background="#fff2faf2"
                     android:smoothScrollbar="true"
                     android:footerDividersEnabled="false"
                     android:headerDividersEnabled="false"

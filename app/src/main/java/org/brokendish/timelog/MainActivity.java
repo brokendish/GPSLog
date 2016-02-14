@@ -26,7 +26,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+//import android.widget.ToggleButton;
+import android.widget.Switch;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -53,13 +54,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private static final String BR = System.getProperty("line.separator");
     private static final String OUT_FILE = "listView.txt";
     boolean fg=false;
-    boolean tgbFlg=false;
+//    boolean tgbFlg=false;
 
     Button button;
     Button button2;
     Button button3;
     Button button4;
-    ToggleButton tgb;
+//    ToggleButton tgb;
+    Switch swt;
+
 
     String Altitude;    //高度
     double Time;        //時間
@@ -89,12 +92,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         button4 = (Button)findViewById(R.id.button4);
         button4.setOnClickListener(this);
 
-        // トグル押下イベントリスナーの登録
-        tgb = (ToggleButton)findViewById(R.id.toggleButton);
-        tgb.setTextOff("GPS");
-        tgb.setTextOn("Network");  //トグルボタンのメッセージ
-        tgb.setChecked(false);       //OFFへ変更
+        swt = (Switch) findViewById(R.id.switch1);
+        //swt.setOnCheckedChangeListener(this);
 
+        // トグル押下イベントリスナーの登録
+        //tgb = (ToggleButton)findViewById(R.id.toggleButton);
+       // tgb.setTextOff("GPS");
+       // tgb.setTextOn("Network");  //トグルボタンのメッセージ
+       // tgb.setChecked(false);       //OFFへ変更
+        button.setText("保存：Network位置情報");
 
         //-------------------------------
         // listViewを作成
@@ -120,39 +126,52 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //Toggleのクリックイベント
         //-------------------------------
         //ToggleのCheckが変更したタイミングで呼び出されるリスナー
-        tgb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //トグルキーが変更された際に呼び出される
-                Log.d("ToggleButton", "call OnCheckdChangeListener");
-                // ToggleButton が On かどうかを取得
-                boolean checked = tgb.isChecked();
-                if(checked){
-                    button.setText("Network位置情報取得");
-                }
-                else{
-                    button.setText("GPS位置情報取得");
-                }
-            }
-        });
+//       tgb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                //トグルキーが変更された際に呼び出される
+//                Log.d("ToggleButton", "call OnCheckdChangeListener");
+//                // ToggleButton が On かどうかを取得
+//                boolean checked = tgb.isChecked();
+//                if(checked){
+//                    button.setText("Network位置情報取得");
+//                }
+//                else{
+//                    button.setText("GPS位置情報取得");
+//                }
+//            }
+//        });
+
+        swt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               //トグルキーが変更された際に呼び出される
+               Log.d("ToggleButton", "call OnCheckdChangeListener");
+               if (isChecked) {
+                   button.setText("保存：GPS位置情報");
+               } else {
+                   button.setText("保存：Network位置情報");
+               }
+           }
+       });
+
 
         //-------------------------------
         //listViewのクリックイベント
         //-------------------------------
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String message = (String)parent.getItemAtPosition(position) + "\nが選択されました。";
+                String message = (String) parent.getItemAtPosition(position) + "\nが選択されました。";
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
 
                 //メッセージから緯度経度を取り出す
                 ClickEvents ce = new ClickEvents();
-                String latlng="";
+                String latlng = "";
                 latlng = ce.splitLatLng(message);
                 Log.d("緯度経度=======", latlng);
 
                 // アクティビティの起動(GoogleMap)
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
-                intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 Uri uri = Uri.parse("geo:0,0?q=" + latlng + "?z=14");
                 intent.setData(uri);
                 startActivity(intent);
@@ -220,7 +239,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_share) {
             return true;
         }
 
@@ -252,7 +271,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Calendar c = Calendar.getInstance();
         //フォーマットパターンを指定して表示する
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 E曜日　HH:mm:ss");
-        String readString ="【GPSLog　" + sdf.format(c.getTime()) + "】\n";
+        String readString ="【GPSMemo　" + sdf.format(c.getTime()) + "】\n";
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
@@ -267,6 +286,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     // Evernoteを開く
     private void onClickButton3() {
         Intent intent = new Intent();
+        intent.putExtra(SearchManager.QUERY, "GPSMemo");
         intent.setAction("com.evernote.action.SEARCH_NOTES");
 //        intent.putExtra(SearchManager.QUERY, "tag:note");
         try {
@@ -341,9 +361,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         String providerG;
 
         // ToggleButton が On かどうかを取得
-       if(tgb.isChecked()){
+       if(swt.isChecked()){
+//        if(true){
+           //トグルがGPSであればGPSプロバイダのみ使用
+           for(int i=0;providers.size()>i;i++){
+               providerG = providers.get(i);
+               if(providerG.compareTo(LocationManager.GPS_PROVIDER)!=0){
+                   providers.remove(i);
+               }
+               if(providers.isEmpty()){
+                   Toast.makeText(MainActivity.this, "GPSプロバイダを取得できません。Passive又はNetworkから取得します", Toast.LENGTH_SHORT).show();
+                   providers = locationManager.getProviders(true);
+               }
+               else{
+                   Toast.makeText(MainActivity.this, "GPSプロバイダから取得します", Toast.LENGTH_SHORT).show();
+               }
+           }
+        }
+        else{
            //トグルがNetworkであればNetwork
-//           Toast.makeText(MainActivity.this, "Networkから取得します", Toast.LENGTH_SHORT).show();
+           Toast.makeText(MainActivity.this, "Networkから取得します", Toast.LENGTH_SHORT).show();
            //NetworkであればNetworkプロバイダのみ使用
            for(int i=0;providers.size()>i;i++){
                providerG = providers.get(i);
@@ -360,22 +397,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                    Toast.makeText(MainActivity.this, "Networkプロバイダから取得します", Toast.LENGTH_SHORT).show();
                }
            }
-        }
-        else{
-           //トグルがGPSであればGPSプロバイダのみ使用
-           for(int i=0;providers.size()>i;i++){
-               providerG = providers.get(i);
-               if(providerG.compareTo(LocationManager.GPS_PROVIDER)!=0){
-                   providers.remove(i);
-               }
-               if(providers.isEmpty()){
-                   Toast.makeText(MainActivity.this, "GPSプロバイダを取得できません。Passive又はNetworkから取得します", Toast.LENGTH_SHORT).show();
-                   providers = locationManager.getProviders(true);
-               }
-               else{
-                   Toast.makeText(MainActivity.this, "GPSプロバイダから取得します", Toast.LENGTH_SHORT).show();
-               }
-           }
+//
        }
 
         //List<String> providers = locationManager.getProviders(true);

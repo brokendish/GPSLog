@@ -47,13 +47,21 @@
                 android:weightSum="1"
                 android:layout_alignTop="@+id/textView">
 
-                <Button
-                    android:layout_width="match_parent"
+                <Switch
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="GPS位置情報取得"
+                    android:text="GPS"
+                    android:id="@+id/switch1"
+                    android:checked="false"
+                    android:layout_weight="0.37" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="保存：GPS位置情報"
                     android:id="@+id/button"
                     android:layout_marginStart="66dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="0.78" />
 
             </TableRow>
 
@@ -74,12 +82,14 @@
                     android:id="@+id/listView"
                     android:layout_column="0"
                     android:textFilterEnabled="false"
-                    android:background="#ff484a48"
+                    android:background="#ffadb2ad"
                     android:smoothScrollbar="true"
                     android:footerDividersEnabled="false"
                     android:headerDividersEnabled="false"
                     android:touchscreenBlocksFocus="false"
                     android:theme="@android:style/Theme.Material.Voice"
+                    android:divider="#ffff850a"
+                    android:dividerHeight="1sp"
                     android:choiceMode="none" />
             </TableRow>
 
@@ -95,19 +105,19 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="38dp"
-                        android:text="Map"
+                        android:text="Export"
                         android:id="@+id/button2" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="38dp"
-                        android:text="SAVE"
+                        android:text="Evernoteを開く"
                         android:id="@+id/button3" />
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="38dp"
-                        android:text="Delete"
+                        android:text="削除する"
                         android:id="@+id/button4" />
 
                 </TableRow>
